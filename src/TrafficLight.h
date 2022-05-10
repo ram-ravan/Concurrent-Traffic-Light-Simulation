@@ -30,7 +30,7 @@ private:
 // can be either „red“ or „green“. Also, add the private method „void cycleThroughPhases()“. 
 // Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value. 
 
-class TrafficLight
+class TrafficLight : public TrafficObject
 {
 public:
     // constructor / desctructor
@@ -38,6 +38,10 @@ public:
     // getters / setters
 
     // typical behaviour methods
+    void waitForGreen();
+    void simulate();
+
+   // TrafficLIghtPhase getCurrentPhase();
 
 private:
     // typical behaviour methods
