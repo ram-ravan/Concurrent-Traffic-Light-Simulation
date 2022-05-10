@@ -61,7 +61,7 @@ void TrafficLight::cycleThroughPhases()
     {   Timer t;
         std::random_device generator;
         std::uniform_int_distribution<int> distribution(4,6);
-        auto random4to6 = distribution(generator);
+        int random4to6 = distribution(generator);
         interval += t.interval;
         if (interval == (std::chrono::seconds) random4to6)
         {
@@ -69,7 +69,7 @@ void TrafficLight::cycleThroughPhases()
                 _currentPhase = green;
             else
                 _currentPhase = red;
-            // std::shared_ptr<MessageQueue<TrafficLightPhase>> mq (new MessageQueue<TrafficLightPhase>);
+            std::shared_ptr<MessageQueue<TrafficLightPhase>> mq (new MessageQueue<TrafficLightPhase>);
             mq->send(std::move(getCurrentPhase()));    
         }
         std::this_thread::sleep_for(1ms);
