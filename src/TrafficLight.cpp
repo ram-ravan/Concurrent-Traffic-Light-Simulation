@@ -1,10 +1,13 @@
 #include <iostream>
 #include <random>
 #include "TrafficLight.h"
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 /* Implementation of class "MessageQueue" */
 
-/* 
+
 template <typename T>
 T MessageQueue<T>::receive()
 {
@@ -19,11 +22,11 @@ void MessageQueue<T>::send(T &&msg)
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
 }
-*/
+
 
 /* Implementation of class "TrafficLight" */
 
-/* 
+
 TrafficLight::TrafficLight()
 {
     _currentPhase = TrafficLightPhase::red;
@@ -36,7 +39,7 @@ void TrafficLight::waitForGreen()
     // Once it receives TrafficLightPhase::green, the method returns.
 }
 
-TrafficLightPhase TrafficLight::getCurrentPhase()
+TrafficLight::TrafficLightPhase TrafficLight::getCurrentPhase()
 {
     return _currentPhase;
 }
@@ -52,7 +55,23 @@ void TrafficLight::cycleThroughPhases()
     // FP.2a : Implement the function with an infinite loop that measures the time between two loop cycles 
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
-    // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+    // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles.
+    std::chrono::duration<float> interval;
+    while(true)
+    {   Timer t;
+        std::random_device generator;
+        std::uniform_int_distribution<int> distribution(4,6);
+        auto random4to6 = distribution(generator);
+        interval += t.interval;
+        if (interval == (std::chrono::seconds) random4to6)
+        {
+            if(_currentPhase == red)
+                _currentPhase = green;
+            else
+                _currentPhase = red;
+            // std::shared_ptr<MessageQueue<TrafficLightPhase>> mq (new MessageQueue<TrafficLightPhase>);
+            mq->send(std::move(getCurrentPhase()));    
+        }
+        std::this_thread::sleep_for(1ms);
+    }
 }
-
-*/
