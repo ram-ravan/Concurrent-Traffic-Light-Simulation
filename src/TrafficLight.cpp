@@ -88,8 +88,7 @@ void TrafficLight::cycleThroughPhases()
     std::mt19937 gen(rd()); // seed the generator
     std::uniform_int_distribution<> distr(4, 6); // define the range
     int randomSeconds = distr(gen);
-
-    // TrafficLightPhase sendCurrentPhase;
+    
     while (true)
     {
         std::chrono::seconds timeIntervalSec = std::chrono::duration_cast<std::chrono::seconds>(timeSinceLastUpdate);
@@ -103,7 +102,6 @@ void TrafficLight::cycleThroughPhases()
                 _currentPhase = green;
             timeIntervalSec = 0s;
             timeSinceLastUpdate = 0ms;
-            // sendCurrentPhase = _currentPhase;
             mq->send(std::move(_currentPhase));
         }
         end = std::chrono::high_resolution_clock::now();
