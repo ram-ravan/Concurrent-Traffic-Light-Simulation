@@ -8,6 +8,10 @@ using namespace std::chrono_literals; //to support 1s, ms etc. as arguments in c
 
 /* Implementation of class "MessageQueue" */
 
+std::random_device rd; // obtain a random number from hardware
+std::mt19937 gen(rd()); // seed the generator
+std::uniform_real_distribution<> distr(4, 6); // define the range
+
 
 template <typename T>
 T MessageQueue<T>::receive()
@@ -29,6 +33,7 @@ void MessageQueue<T>::send(T &&msg)
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
     std::lock_guard<std::mutex> lock(_mutex);
+    _queue.clear();
     _queue.emplace_back(std::move(msg));
     _cond.notify_one();
 }
@@ -52,10 +57,7 @@ TrafficLight::TrafficLightPhase TrafficLight::waitForGreen()
     {
         TrafficLightPhase currentLight = mq->receive();
         if (currentLight == green)
-        {
-            std::cout << "waitForGreen() has " << _currentPhase << " now! let's return it so that the vehicle can proceed" << std::endl;
             return currentLight;
-        }
     }   
 }
 
@@ -84,10 +86,7 @@ void TrafficLight::cycleThroughPhases()
     std::chrono::duration<float> timeSinceLastUpdate; // duration of a single simulation cycle in ms
     std::chrono::time_point<std::chrono::system_clock> start, end;
 
-    std::random_device rd; // obtain a random number from hardware
-    std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(4, 6); // define the range
-    int randomSeconds = distr(gen);
+    float randomSeconds = distr(gen);
     
     while (true)
     {
