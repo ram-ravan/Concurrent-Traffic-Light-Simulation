@@ -2,9 +2,7 @@
 
 This project is built using a suitable and thread-safe communication protocol between vehicles and intersections to complete the simulation. C++ Concurrent programming conepts(such as mutexes, locks and message queues) are used to implement the traffic lights and integrate them properly in the code base. The [starter code](https://github.com/udacity/CppND-Memory-Management-Chatbot) for this project is provided by Udacity as a part of C++ nanodegree program.
 
-<img src="data/traffic_simulation.gif"/>
-
-This is the project for the fourth course in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213): Concurrency. 
+<img src="data/traffic_simulation.gif"/> 
 
 ## Dependencies for Running Locally
 * cmake >= 2.8
