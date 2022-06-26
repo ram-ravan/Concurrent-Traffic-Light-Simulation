@@ -1,10 +1,10 @@
-# CPPND: Program a Concurrent Traffic Simulation
+# Concurrent Traffic Simulation
+
+This project is built using a suitable and thread-safe communication protocol between vehicles and intersections to complete the simulation. C++ Concurrent programming conepts(such as mutexes, locks and message queues) are used to implement the traffic lights and integrate them properly in the code base. The [starter code](https://github.com/udacity/CppND-Memory-Management-Chatbot) for this project is provided by Udacity as a part of C++ nanodegree program.
 
 <img src="data/traffic_simulation.gif"/>
 
 This is the project for the fourth course in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213): Concurrency. 
-
-Throughout the Concurrency course, you have been developing a traffic simulation in which vehicles are moving along streets and are crossing intersections. However, with increasing traffic in the city, traffic lights are needed for road safety. Each intersection will therefore be equipped with a traffic light. In this project, you will build a suitable and thread-safe communication protocol between vehicles and intersections to complete the simulation. Use your knowledge of concurrent programming (such as mutexes, locks and message queues) to implement the traffic lights and integrate them properly in the code base.
 
 ## Dependencies for Running Locally
 * cmake >= 2.8
@@ -27,7 +27,7 @@ Throughout the Concurrency course, you have been developing a traffic simulation
 3. Compile: `cmake .. && make`
 4. Run it: `./traffic_simulation`.
 
-## Project Tasks
+## Project Tasks implemented
 
 When the project is built initially, all traffic lights will be green. When you are finished with the project, your traffic simulation should run with red lights controlling traffic, just as in the .gif file above. See the classroom instruction and code comments for more details on each of these parts. 
 
